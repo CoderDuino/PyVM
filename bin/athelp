@@ -1,0 +1,27 @@
+#!/usr/local/bin/python3
+
+# Help Command
+# auto
+# By: Ari Stehney
+#
+
+import os
+import sys
+import crayons
+import time
+
+print(crayons.magenta("------------==ATCC-PYVM Help==------------"))
+print(crayons.yellow( "Commands:                                 "))
+print(crayons.cyan(   "  atcc       | GCC Like Compiler          "))
+print(crayons.cyan(   "  atmake     | Makefile reader/compiler   "))
+print(crayons.cyan(   "  athelp     | Help Screen (Here)         "))
+print(crayons.cyan(   "  atsdk      | SDK Installer/Updater/Info "))
+print(crayons.cyan(   "  atmod      | Module Installer/Updater   "))
+print(crayons.cyan(   "  atrun      | ATFBIN Launcher            "))
+print(crayons.cyan(   "  atdis      | Disassembler (Like otool)  "))
+print(crayons.yellow( "						 "))
+
+print(crayons.yellow( "Module list:"))
+for path, subdirs, files in os.walk(os.path.dirname(__file__)+"/../modules"):
+    for name in subdirs:
+        print(crayons.cyan("  "+name))

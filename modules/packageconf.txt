@@ -1,0 +1,6 @@
+{
+	"packageserver":"github.com",
+	"priority":"master",
+	"serverbranch":"/archive/master",
+	"servername":"Github/GIT"
+}

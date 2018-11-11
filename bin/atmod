@@ -1,0 +1,84 @@
+#!/usr/local/bin/python3
+
+# Module Installer For at
+# auto
+# By: Ari Stehney
+#
+
+import os
+import sys
+import crayons
+import time
+import json
+
+with open(os.path.dirname(__file__)+"/../modules/packageconf.txt", 'r') as f:
+	pypki = json.load(f)
+
+
+if sys.argv[1]=="list":
+	print(crayons.yellow( "Module list:"))
+	for path, subdirs, files in os.walk(os.path.dirname(__file__)+"/../modules"):
+		for name in subdirs:
+			print(crayons.cyan("  "+name))
+
+if sys.argv[1]=="config":
+	print(crayons.magenta( "Conf File: "+os.path.dirname(__file__)+"/../modules/packageconf.txt"))
+	for key in pypki:
+		print(crayons.cyan(key+": "+pypki[key]))
+	
+
+if sys.argv[1]=="install":
+	if pypki["priority"]!="master" and pypki["priority"]!="main":
+		print(crayons.red("branch is not master (Err: NoMain)!"))
+		sys.exit()
+	print(crayons.green("installing package "+sys.argv[2]+"..."))
+	print(crayons.green("downloading package..."))
+	print(crayons.yellow("server: "+pypki["servername"]))
+	print(crayons.yellow("branch/version: "+pypki["serverbranch"]))
+	os.system("cd "+os.path.dirname(__file__)+"/../modules/ && curl -L -O "+"https://"+pypki["packageserver"]+"/"+sys.argv[2]+pypki["serverbranch"]+".zip")
+
+	print(crayons.green("expanding package..."))
+
+	chFile = ""
+	for file in os.listdir(os.path.dirname(__file__)+"/../modules/"):
+		if file.endswith(".zip"):
+			chFile = file
+
+	os.system("cd "+os.path.dirname(__file__)+"/../modules/ && unzip "+chFile)
+	
+	print(crayons.green("cleaning up package..."))
+	os.system("cd "+os.path.dirname(__file__)+"/../modules/ && rm "+chFile)
+
+	print(crayons.green("running install for " + sys.argv[2] + "..."))
+	if os.path.isfile(os.path.dirname(__file__)+"/../modules/"+chFile.split(".")[0]+"/setup.py"):
+                os.system("cd "+os.path.dirname(__file__)+"/../modules/"+chFile.split(".")[0]+" && python3 setup.py")
+	print(crayons.green("installed " + sys.argv[2] + " successfully!"))
+
+if sys.argv[1]=="zipinstall":
+	print(crayons.green("installing package "+sys.argv[2]+"..."))
+	print(crayons.green("downloading package..."))
+	os.system("cd "+os.getcwd()+"/ && cp "+sys.argv[2]+" "+os.path.dirname(__file__)+"/../modules/"+sys.argv[2])
+        
+	print(crayons.green("expanding package..."))
+
+	chFile = ""
+	for file in os.listdir(os.path.dirname(__file__)+"/../modules/"):
+		if file.endswith(".zip"):
+			chFile = file
+
+	os.system("cd "+os.path.dirname(__file__)+"/../modules/ && unzip "+chFile)
+	
+	print(crayons.green("cleaning up package..."))
+	os.system("cd "+os.path.dirname(__file__)+"/../modules/ && rm "+chFile)
+
+	print(crayons.green("running install for " + sys.argv[2] + "..."))
+
+	if os.path.isfile(os.path.dirname(__file__)+"/../modules/"+chFile.split(".")[0]+"/setup.py"):
+                os.system("cd "+os.path.dirname(__file__)+"/../modules/"+chFile.split(".")[0]+" && python3 setup.py")
+		
+	print(crayons.green("installed " + sys.argv[2] + " successfully!"))
+	
+	
+	
+	
+

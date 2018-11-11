@@ -1,0 +1,44 @@
+#!/usr/local/bin/python3
+
+#
+# AT BIN Dissasembler
+#
+# By: AriStehney
+#
+#
+
+import os
+import sys
+import time
+import crayons
+import optomizer
+
+with open(os.getcwd() + "/" + sys.argv[1], mode="r") as hdIn:
+	hdisk = hdIn.read()
+
+outputdis = optomizer.OptomizerTrans(hdisk)
+
+print(crayons.yellow("section: main"))
+print(crayons.yellow("format: ATFBIN"))
+print("_sec mainpvm:")
+lineNum = -1
+
+def RepresentsInt(s):
+    try: 
+        int(s)
+        return True
+    except ValueError:
+        return False
+
+for line in outputdis:
+	lineNum+=1
+	if len(sys.argv)>2:
+		if sys.argv[2]=="-o":
+			with open(os.getcwd() + "/" + sys.argv[3], mode="a") as hdIn:
+				print("writing...")
+				if '"' in line:
+					line = "["+line.replace('"','')+"]"
+				if RepresentsInt(line):
+					line = "{"+line+"}"
+				hdIn.write(line+"\n")
+	print(str(hex(lineNum))+"	"+line)

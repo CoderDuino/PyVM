@@ -1,0 +1,6 @@
+// Macro Demo Code;
+#include system.h;
+callmacro(__name);
+callmacro(logstk);
+callmacro(__version);
+callmacro(logstk);

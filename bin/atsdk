@@ -1,0 +1,13 @@
+#!/usr/local/bin/python3
+
+import os
+import sys
+import time
+import crayons
+
+if sys.argv[1]=="-v":
+	print("PYVM Stable on Python 3")
+if sys.argv[1]=="-u":
+	print("Updates Not Available!")
+if sys.argv[1]=="-i":
+	os.system("cd ~/pyvm/ && ./install.sh")

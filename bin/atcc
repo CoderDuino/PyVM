@@ -1,0 +1,23 @@
+#!/usr/local/bin/python3
+
+# Tests compiler for vm
+# auto
+# By: Ari Stehney
+#
+
+import os
+import sys
+import crayons
+import time
+
+fileNameIn = sys.argv[1]
+fileNameOut = os.path.splitext(fileNameIn)[0]
+
+print(fileNameIn)
+
+os.system("cd "+os.path.dirname(__file__)+"/ &&"+" python3 ../compiler.py "+os.getcwd()+"/"+fileNameIn+" "+os.getcwd()+"/"+fileNameOut+".ppvm")
+os.system("cd "+os.path.dirname(os.path.abspath(__file__))+"/ &&"+" python3 ../assembler.py "+os.getcwd()+"/"+fileNameOut+".ppvm"+" "+os.getcwd()+"/"+fileNameOut+".hdd")
+
+if sys.argv[2]=="-ra":
+        os.system("cd "+os.path.dirname(os.path.abspath(__file__))+" &&"+" python3 ../pvm.py "+os.getcwd()+"/"+fileNameOut+".hdd")
+        
