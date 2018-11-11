@@ -20,8 +20,8 @@ chmod +x install.sh
 ./install.sh
 ```
 # Running
-use:
-		atcc - at C compiler")
-		atmake - makefile automater")
-		atsdk - sdk manager (updater/installer/version)")
-		atrun - output runner")
+Commands:
+atcc <source file>- at C compiler
+atmake <makefile>- makefile automater
+atsdk - sdk manager (updater/installer/version)
+atrun <filename>- output runtime
