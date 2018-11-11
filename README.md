@@ -1,5 +1,5 @@
 # PyVM
-Python Compiler and Assembler demo
+Python Compiler and Assembler demo.
 This is very simple and buggy but is a good demo
 on how code complimation works.
 
@@ -21,7 +21,7 @@ chmod +x install.sh
 ```
 # Running
 Commands:
-atcc <source file>- at C compiler
-atmake <makefile>- makefile automater
-atsdk - sdk manager (updater/installer/version)
-atrun <filename>- output runtime
+1. atcc <source file>- at C compiler.
+2. atmake <makefile>- makefile automater.
+3. atsdk - sdk manager (updater/installer/version).
+4. atrun <filename>- output runtime.
